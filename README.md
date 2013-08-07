@@ -1,0 +1,4 @@
+ClarityNotificationBundle
+=========================
+
+Abstract notification system
