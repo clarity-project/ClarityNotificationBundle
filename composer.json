@@ -1,7 +1,7 @@
 {
     "name": "clarity-project/notification-bundle",
     "description": "Symfony2 bundle for manage whole site notification system",
-    "keywords": ["php", "symfony", "symfony2", "notification", "email",],
+    "keywords": ["php", "symfony", "symfony2", "notification", "email"],
     "license": "MIT",
     "authors": [
         {
