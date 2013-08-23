@@ -45,5 +45,6 @@ class TransportCompilerPass implements CompilerPassInterface
         }
 
         $notifierDefinition->replaceArgument(0, $transports);
+        $notifierDefinition->replaceArgument(1, $container->getParameter('clarity_notification.templates'));
     }
 }

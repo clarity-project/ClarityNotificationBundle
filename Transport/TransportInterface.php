@@ -7,4 +7,7 @@ namespace Clarity\NotificationBundle\Transport;
  */
 interface TransportInterface
 {
+    // public function with($name);
+
+    // public function notify();
 }

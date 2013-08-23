@@ -6,12 +6,13 @@
 
     
     <parameters>
-        <parameter key="clarity_notification.notifier.class">Clarity\NotificationBundle\Notification\Notifier</parameter>
+        <parameter key="clarity_notification.notifier.class">Clarity\NotificationBundle\Notifier</parameter>
     </parameters>
 
     <services>
         <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
-            <argument />
+            <argument /> <!-- available transports -->
+            <argument /> <!-- templates for messages -->
         </service>
     </services>
     
