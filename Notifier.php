@@ -19,15 +19,17 @@ class Notifier
      * 
      * @var array $options 
      */
-    private $options;
+    private $templates;
 
     /**
      * @param array $transports
+     * @param array $messages
+     * @param array $templates
      */
-    public function __construct(array $transports, array $options)
+    public function __construct(array $transports, array $templates)
     {
         $this->transports = $transports;
-        $this->options = $options;
+        $this->templates = $templates;
     }
 
     /**
@@ -36,7 +38,7 @@ class Notifier
      */
     public function createMessageBuilder($transport)
     {
-        return new Message\Builder($this->transports[$transport], $this->options);
+        return new Message\Builder($this->transports[$transport], $this->templates);
     }
 
     /**

@@ -12,6 +12,8 @@
     <services>
         <service id="clarity_notification.transport.mail" class="%clarity_notification.transport.email.class%">
             <tag name="clarity_notification.transport" alias="email" />
+            <argument type="service" id="templating" />
+            <argument type="service" id="mailer" />
         </service>
     </services>
     

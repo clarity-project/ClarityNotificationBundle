@@ -3,6 +3,7 @@
 namespace Clarity\NotificationBundle\Message;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -18,6 +19,11 @@ class Mail implements MessageInterface
      * @var array
      */
     private $options;
+
+    /**
+     * @var \Symfony\Component\Templating\EngineInterface $templating
+     */
+    private $templating;
 
     /**
      * 
@@ -56,17 +62,27 @@ class Mail implements MessageInterface
     }
 
     /**
+     * @param \Symfony\Component\Templating\EngineInterface $templating
+     */
+    public function setTemplating($templating)
+    {
+        $this->templating = $templating;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function build()
     {
         $options = $this->resolver->resolve($this->options);
 
-        \Swift_Message::newInstance()
+        $message = \Swift_Message::newInstance()
             ->setSubject($options['subject'])
             ->setFrom(array($options['from'] => $options['name']))
             ->setTo($options['to'])
-            ->setBody($this->renderView($options['message_template'], $options['message_arguments'])
+            ->setBody($this->templating->render($options['message_template'], $options['message_arguments'])
         );
+
+        return $message;
     }
 }

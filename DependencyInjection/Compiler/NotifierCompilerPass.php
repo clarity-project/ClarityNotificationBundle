@@ -10,12 +10,12 @@ use Clarity\NotificationBundle\Transport\Exception;
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-class TransportCompilerPass implements CompilerPassInterface
+class NotifierCompilerPass implements CompilerPassInterface
 {   
     /**
      * @const
      */
-    const TAG = 'clarity_notification.transport';
+    const TRANSPORT_TAG = 'clarity_notification.transport';
 
     /**
      * {@inheritDoc}
@@ -29,7 +29,7 @@ class TransportCompilerPass implements CompilerPassInterface
         $notifierDefinition = $container->getDefinition('clarity_notification.notifier');
 
         $transports = array();
-        foreach ($container->findTaggedServiceIds(self::TAG) as $id => $tags) {
+        foreach ($container->findTaggedServiceIds(self::TRANSPORT_TAG) as $id => $tags) {
             $alias = null;
             foreach ($tags as $tag) {
                 if (isset($tag['alias'])) {
@@ -38,7 +38,7 @@ class TransportCompilerPass implements CompilerPassInterface
             }
 
             if (null === $alias) {
-                throw new Exception\TransportDeclarationException(sprintf('Transport "%s" definition with configuration tag named "%s" must contain alias attribute', $id, self::TAG));
+                throw new Exception\TransportDeclarationException(sprintf('Transport "%s" definition with configuration tag named "%s" must contain alias attribute', $id, self::TRANSPORT_TAG));
             }
 
             $transports[$alias] = new Reference($id);

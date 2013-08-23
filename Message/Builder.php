@@ -17,7 +17,7 @@ class Builder
     /**
      * @var array
      */
-    private $options;
+    private $templates;
 
     /**
      * @param \Clarity\NotificationBundle\Message\MessageInterface
@@ -28,10 +28,10 @@ class Builder
      * @param \Clarity\NotificationBundle\Transport\TransportInterface $transport
      * @param array $options configurations of the default templates for messages
      */
-    public function __construct(TransportInterface $transport, array $options)
+    public function __construct(TransportInterface $transport, array $templates)
     {
         $this->transport = $transport;
-        $this->options = $options;
+        $this->templates = $templates;
     }
 
     /**
@@ -51,11 +51,11 @@ class Builder
      */
     public function with($name)
     {
-        if (!isset($this->options[$name])) {
+        if (!isset($this->templates[$name])) {
             throw new Exception\ConfigurationNotFoundException(sprintf('Configuration for "%s" not found.', $name));
         }
 
-        $this->message->setDefaultOptions($this->options[$name]);
+        $this->message->setDefaultOptions($this->templates[$name]);
 
         return $this;
     }
@@ -76,6 +76,6 @@ class Builder
      */
     public function notify()
     {
-        
+        return $this->transport->notify($this->message);
     }
 }

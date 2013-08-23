@@ -4,7 +4,7 @@ namespace Clarity\NotificationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Clarity\NotificationBundle\DependencyInjection\Compiler\TransportCompilerPass;
+use Clarity\NotificationBundle\DependencyInjection\Compiler\NotifierCompilerPass;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -18,6 +18,6 @@ class ClarityNotificationBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new TransportCompilerPass());
+        $container->addCompilerPass(new NotifierCompilerPass());
     }
 }
