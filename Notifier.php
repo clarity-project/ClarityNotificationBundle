@@ -40,16 +40,19 @@ class Notifier
     }
 
     /**
-     * @param string $name Alias name of the notification transport
+     * @param string $transport Alias name of the notification transport
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    public function compose($name)
+    public function compose($transport)
     {
-        if (!isset($this->transports[$name])) {
+        if (!isset($this->transports[$transport])) {
             throw new Transport\Exception\NotFoundException(sprintf('Transport with name "%s" was not found in configured list.', $name));
         }
         
-        $builder = $this->createMessageBuilder($name);
+        $builder = $this->createMessageBuilder($transport);
+
+        // super hardcode for fast solution
+        $builder->create(new Message\Mail());
 
         // some actions of composing message
 

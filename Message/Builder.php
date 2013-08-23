@@ -59,4 +59,23 @@ class Builder
 
         return $this;
     }
+
+    /**
+     * @param array $options
+     * @return self
+     */
+    public function resolve(array $options)
+    {
+        $this->message->resolveOptions($options);
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function notify()
+    {
+        
+    }
 }
