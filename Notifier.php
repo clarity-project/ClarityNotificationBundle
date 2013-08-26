@@ -54,7 +54,7 @@ class Notifier
         $builder = $this->createMessageBuilder($transport);
 
         // super hardcode for fast solution
-        $builder->create(new Message\Mail());
+        $builder->create(new Message\Type\MailType());
 
         // some actions of composing message
 

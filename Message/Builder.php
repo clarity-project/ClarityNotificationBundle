@@ -20,7 +20,7 @@ class Builder
     private $templates;
 
     /**
-     * @param \Clarity\NotificationBundle\Message\MessageInterface
+     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface
      */
     private $message;
 
@@ -35,10 +35,10 @@ class Builder
     }
 
     /**
-     * @param \Clarity\NotificationBundle\Message\MessageInterface $message
+     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $message
      * @return self
      */
-    public function create(MessageInterface $message)
+    public function create(Type\MessageTypeInterface $message)
     {
         $this->message = $message;
 

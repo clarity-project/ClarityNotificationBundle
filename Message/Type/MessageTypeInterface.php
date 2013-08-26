@@ -1,11 +1,11 @@
 <?php
 
-namespace Clarity\NotificationBundle\Message;
+namespace Clarity\NotificationBundle\Message\Type;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-interface MessageInterface
+interface MessageTypeInterface
 {
     /**
      * @return array

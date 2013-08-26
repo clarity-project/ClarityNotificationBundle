@@ -1,6 +1,6 @@
 <?php
 
-namespace Clarity\NotificationBundle\Message;
+namespace Clarity\NotificationBundle\Message\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Templating\EngineInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Templating\EngineInterface;
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-class Mail implements MessageInterface
+class MailType implements MessageTypeInterface
 {   
     /**
      * @var \Symfony\Component\OptionsResolver\OptionsResolverInterface

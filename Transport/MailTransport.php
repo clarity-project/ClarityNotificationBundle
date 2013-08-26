@@ -3,8 +3,8 @@
 namespace Clarity\NotificationBundle\Transport;
 
 use Symfony\Component\Templating\EngineInterface;
-use Clarity\NotificationBundle\Message\MessageInterface;
-use Clarity\NotificationBundle\Message\Mail;
+use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
+use Clarity\NotificationBundle\Message\Type\MailType;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -27,14 +27,14 @@ class MailTransport implements TransportInterface
      */
     public function __construct(EngineInterface $templating, \Swift_Mailer $mailer)
     {
-        $this->templating = $templating;
-        $this->mailer = $mailer;
+        $this->templating   = $templating;
+        $this->mailer       = $mailer;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function notify(MessageInterface $message)
+    public function notify(MessageTypeInterface $message)
     {
         if (!$this->isSupported($message)) {
             return false;
@@ -48,8 +48,8 @@ class MailTransport implements TransportInterface
     /**
      * {@inheritDoc}
      */
-    public function isSupported(MessageInterface $message)
+    public function isSupported(MessageTypeInterface $message)
     {
-        return (bool) ($message instanceof Mail);
+        return (bool) ($message instanceof MailType);
     }
 }
