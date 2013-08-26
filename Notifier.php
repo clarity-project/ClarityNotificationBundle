@@ -2,6 +2,8 @@
 
 namespace Clarity\NotificationBundle;
 
+use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
+
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
@@ -22,42 +24,43 @@ class Notifier
     private $templates;
 
     /**
+     * Messages types
+     * 
+     * @var array 
+     */
+    private $types;
+
+    /**
      * @param array $transports
-     * @param array $messages
+     * @param array $types
      * @param array $templates
      */
-    public function __construct(array $transports, array $templates)
+    public function __construct(array $transports, array $types, array $templates)
     {
-        $this->transports = $transports;
-        $this->templates = $templates;
+        $this->transports   = $transports;
+        $this->templates    = $templates;
+        $this->types        = $types;
     }
 
     /**
-     * @param string $transport
+     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $type
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    public function createMessageBuilder($transport)
+    public function createMessageBuilder(MessageTypeInterface $type)
     {
-        return new Message\Builder($this->transports[$transport], $this->templates);
+        return new Message\Builder($type, $this->templates);
     }
 
     /**
-     * @param string $transport Alias name of the notification transport
+     * @param string $type Alias name of the message type
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    public function compose($transport)
+    public function compose($type)
     {
-        if (!isset($this->transports[$transport])) {
-            throw new Transport\Exception\NotFoundException(sprintf('Transport with name "%s" was not found in configured list.', $name));
+        if (!isset($this->types[$type])) {
+            throw new Transport\Exception\NotFoundException(sprintf('Message of type "%s" was not configured. Available types are: %s.', $type, implode(', ', array_keys($this->types))));
         }
         
-        $builder = $this->createMessageBuilder($transport);
-
-        // super hardcode for fast solution
-        $builder->create(new Message\Type\MailType());
-
-        // some actions of composing message
-
-        return $builder;
+        return $this->createMessageBuilder($this->types[$type]);
     }
 }

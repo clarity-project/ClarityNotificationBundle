@@ -25,6 +25,12 @@ interface MessageTypeInterface
     public function setDefaultOptions(array $options);
 
     /**
+     * @param array $transports
+     * @return self
+     */
+    public function setAllowedTransports(array $transports);
+
+    /**
      * @return mixed
      */
     public function build();

@@ -26,15 +26,21 @@ class MailType implements MessageTypeInterface
     private $templating;
 
     /**
-     * 
+     * @var array
      */
-    public function __construct()
+    private $transports;
+
+    /**
+     * @param EngineInterface $templating
+     */
+    public function __construct(EngineInterface $templating)
     {
         $this->resolver = new OptionsResolver();
         $this->resolver->setRequired(array(
             'subject', 'name', 'from', 'to', 'message_template', 'message_arguments'
         ));
         $this->options = array();
+        $this->templating = $templating;
     }
 
     /**
@@ -62,14 +68,6 @@ class MailType implements MessageTypeInterface
     }
 
     /**
-     * @param \Symfony\Component\Templating\EngineInterface $templating
-     */
-    public function setTemplating($templating)
-    {
-        $this->templating = $templating;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function build()
@@ -84,5 +82,15 @@ class MailType implements MessageTypeInterface
         );
 
         return $message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAllowedTransports(array $transports)
+    {
+        $this->transports = $transports;
+
+        return $this;
     }
 }

@@ -26,6 +26,7 @@ class ClarityNotificationExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-        $loader->load('default_transports.xml');
+        $loader->load('transports.xml');
+        $loader->load('message_types.xml');
     }
 }
