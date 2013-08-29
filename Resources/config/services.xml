@@ -15,6 +15,11 @@
             <argument /> <!-- messages types -->
             <argument /> <!-- templates for messages -->
         </service>
+        <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
+            <argument /> <!-- available transports -->
+            <argument /> <!-- messages types -->
+            <argument /> <!-- templates for messages -->
+        </service>
     </services>
     
 </container>

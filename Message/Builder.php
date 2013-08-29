@@ -2,7 +2,7 @@
 
 namespace Clarity\NotificationBundle\Message;
 
-use Clarity\NotificationBundle\Transport\TransportInterface;
+use Clarity\NotificationBundle\Message\MessageTypeInterface;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -25,12 +25,12 @@ class Builder
     private $message;
 
     /**
-     * @param \Clarity\NotificationBundle\Transport\TransportInterface $transport
+     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $transport
      * @param array $options configurations of the default templates for messages
      */
-    public function __construct(TransportInterface $transport, array $templates)
+    public function __construct(MessageTypeInterface $message, array $templates)
     {
-        $this->transport = $transport;
+        $this->message = $message;
         $this->templates = $templates;
     }
 
@@ -38,7 +38,7 @@ class Builder
      * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $message
      * @return self
      */
-    public function create(Type\MessageTypeInterface $message)
+    public function create(MessageTypeInterface $message)
     {
         $this->message = $message;
 

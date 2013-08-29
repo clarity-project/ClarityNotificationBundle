@@ -11,7 +11,7 @@
 
     <services>
         <service id="clarity_notification.message.type.mail" class="%clarity_notification.message.type.mail.class%">
-            <tag name="clarity_notification.message_type" alias="mail" transports="mail" />
+            <tag name="clarity_notification.message_type" alias="mail" />
             <argument type="service" id="templating" />
         </service>
     </services>

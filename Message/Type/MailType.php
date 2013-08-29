@@ -26,11 +26,6 @@ class MailType implements MessageTypeInterface
     private $templating;
 
     /**
-     * @var array
-     */
-    private $transports;
-
-    /**
      * @param EngineInterface $templating
      */
     public function __construct(EngineInterface $templating)
@@ -82,15 +77,5 @@ class MailType implements MessageTypeInterface
         );
 
         return $message;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAllowedTransports(array $transports)
-    {
-        $this->transports = $transports;
-
-        return $this;
     }
 }

@@ -46,10 +46,10 @@ class Notifier
      * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $type
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    public function createMessageBuilder(MessageTypeInterface $type)
-    {
-        return new Message\Builder($type, $this->templates);
-    }
+    // public function createMessageBuilder(MessageTypeInterface $type)
+    // {
+    //     return new Message\Builder($this, $type, $this->templates);
+    // }
 
     /**
      * @param string $type Alias name of the message type
@@ -62,5 +62,10 @@ class Notifier
         }
         
         return $this->createMessageBuilder($this->types[$type]);
+    }
+
+    public function notifyBy()
+    {
+        
     }
 }

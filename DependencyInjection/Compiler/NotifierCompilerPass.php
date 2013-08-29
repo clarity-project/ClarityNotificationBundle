@@ -85,27 +85,26 @@ class NotifierCompilerPass implements CompilerPassInterface
                     $alias = $tag['alias'];
                 }
 
-                if (isset($tag['transports'])) {
-                    $transports = $tag['transports'];
-                }
+                // if (isset($tag['transports'])) {
+                //     $transports = $tag['transports'];
+                // }
             }
 
             if (null === $alias) {
                 throw new MessageException\MessageDeclarationException(sprintf('Message "%s" definition with configuration tag named "%s" must contain alias attribute', $id, self::MESSAGE_TYPE_TAG));
             }
 
-            if (null === $transports) {
-                throw new MessageException\MessageDeclarationException(sprintf('Message "%s" definition with configuration tag named "%s" must contain transports attribute to know allowed transports', $id, self::MESSAGE_TYPE_TAG));
-            }
+            // if (null === $transports) {
+            //     throw new MessageException\MessageDeclarationException(sprintf('Message "%s" definition with configuration tag named "%s" must contain transports attribute to know allowed transports', $id, self::MESSAGE_TYPE_TAG));
+            // }
 
-            $transports = explode(',', $transports);
-            foreach ($transports as $key => $name) {
-                $transports[$key] = trim($name);
-            }
+            // $transports = explode(',', $transports);
+            // foreach ($transports as $key => $name) {
+            //     $transports[$key] = trim($name);
+            // }
 
-            $type = $container->getDefinition($id);
-            $type->addMethodCall('setAllowedTransports', array($transports));
-
+            // $type = $container->getDefinition($id);
+            // $type->addMethodCall('setAllowedTransports', array($transports));
 
             $types[$alias] = new Reference($id);
 
