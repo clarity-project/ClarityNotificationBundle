@@ -48,7 +48,7 @@ class Notifier
     public function compose($transport)
     {
         if (!isset($this->transports[$transport])) {
-            throw new Transport\Exception\NotFoundException(sprintf('Transport with name "%s" was not found in configured list.', $name));
+            throw new Transport\Exception\NotFoundException(sprintf('Transport with name "%s" was not found in configured list.', $transport));
         }
         
         $builder = $this->createMessageBuilder($transport);
