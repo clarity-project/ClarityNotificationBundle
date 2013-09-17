@@ -6,13 +6,14 @@
 
     
     <parameters>
-        <parameter key="clarity_notification.message.type.mail.class">Clarity\NotificationBundle\Message\Type\MailType</parameter>
+        <parameter key="clarity_notification.transport.email.class">Clarity\NotificationBundle\Transport\MailTransport</parameter>
     </parameters>
 
     <services>
-        <service id="clarity_notification.message.type.mail" class="%clarity_notification.message.type.mail.class%">
-            <tag name="clarity_notification.message_type" alias="mail" />
+        <service id="clarity_notification.transport.mail" class="%clarity_notification.transport.email.class%">
+            <tag name="clarity_notification.transport" alias="email" />
             <argument type="service" id="templating" />
+            <argument type="service" id="mailer" />
         </service>
     </services>
     

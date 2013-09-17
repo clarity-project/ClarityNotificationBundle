@@ -7,17 +7,15 @@
     
     <parameters>
         <parameter key="clarity_notification.notifier.class">Clarity\NotificationBundle\Notifier</parameter>
+        <parameter key="clarity_notification.factory.class">Clarity\NotificationBundle\Message\Factory</parameter>
     </parameters>
 
     <services>
-        <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
-            <argument /> <!-- available transports -->
-            <argument /> <!-- messages types -->
-            <argument /> <!-- templates for messages -->
+        <service id="clarity_notification.factory" class="%clarity_notification.factory.class%">
         </service>
+
         <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
             <argument /> <!-- available transports -->
-            <argument /> <!-- messages types -->
             <argument /> <!-- templates for messages -->
         </service>
     </services>

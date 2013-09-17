@@ -2,8 +2,6 @@
 
 namespace Clarity\NotificationBundle;
 
-use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
-
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
@@ -24,48 +22,42 @@ class Notifier
     private $templates;
 
     /**
-     * Messages types
-     * 
-     * @var array 
-     */
-    private $types;
-
-    /**
      * @param array $transports
-     * @param array $types
+     * @param array $messages
      * @param array $templates
      */
-    public function __construct(array $transports, array $types, array $templates)
+    public function __construct(array $transports, array $templates)
     {
-        $this->transports   = $transports;
-        $this->templates    = $templates;
-        $this->types        = $types;
+        $this->transports = $transports;
+        $this->templates = $templates;
     }
 
     /**
-     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $type
+     * @param string $transport
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    // public function createMessageBuilder(MessageTypeInterface $type)
-    // {
-    //     return new Message\Builder($this, $type, $this->templates);
-    // }
+    public function createMessageBuilder($transport)
+    {
+        return new Message\Builder($this->transports[$transport], $this->templates);
+    }
 
     /**
-     * @param string $type Alias name of the message type
+     * @param string $transport Alias name of the notification transport
      * @return \Clarity\NotificationBundle\Message\Builder
      */
-    public function compose($type)
+    public function compose($transport)
     {
-        if (!isset($this->types[$type])) {
-            throw new Transport\Exception\NotFoundException(sprintf('Message of type "%s" was not configured. Available types are: %s.', $type, implode(', ', array_keys($this->types))));
+        if (!isset($this->transports[$transport])) {
+            throw new Transport\Exception\NotFoundException(sprintf('Transport with name "%s" was not found in configured list.', $transport));
         }
         
-        return $this->createMessageBuilder($this->types[$type]);
-    }
+        $builder = $this->createMessageBuilder($transport);
 
-    public function notifyBy()
-    {
-        
+        // super hardcode for fast solution
+        $builder->create(new Message\Type\MailType());
+
+        // some actions of composing message
+
+        return $builder;
     }
 }
