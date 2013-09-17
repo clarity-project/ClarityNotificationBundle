@@ -7,4 +7,19 @@ namespace Clarity\NotificationBundle\Message;
  */
 class Factory
 {
+    /**
+     * @var \Clarity\NotificationBundle\Message\Registry
+     */
+    private $registry;
+
+    private $resolver;
+
+    /**
+     * 
+     */
+    public function __construct(Registry $registry, Resolver $resolver)
+    {
+        $this->registry = $registry;
+        $this->resolver = $resolver;
+    }
 }

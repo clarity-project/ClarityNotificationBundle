@@ -17,7 +17,7 @@ class MessageFactoryTest extends WebTestCase
     public function testFactoryExistence()
     {
         $client = static::createClient();
-        $factory = $client->getContainer()->get('clarity_notification.factory');
+        $factory = $client->getContainer()->get('clarity_notification.message_factory');
         $this->assertTrue($factory instanceof MessageFactory, 
             sprintf('Factory object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Factory')
         );
