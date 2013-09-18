@@ -7,4 +7,12 @@ namespace Clarity\NotificationBundle\Message;
  */
 class Resolver
 {
+    /**
+     * @param \Clarity\NotificationBundle\Message\MessageTypeInterface
+     * @return \Clarity\NotificationBundle\Message\MessageInterface
+     */
+    public function resolve(MessageTypeInterface $type, $options = null)
+    {
+        return new Message();
+    }
 }

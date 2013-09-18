@@ -1,11 +1,10 @@
 <?php
 
-namespace Clarity\NotificationBundle;
+namespace Clarity\NotificationBundle\Message;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-class Message
+interface MessageInterface
 {
-
 }
