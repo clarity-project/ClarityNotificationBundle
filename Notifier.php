@@ -28,6 +28,4 @@ class Notifier
     {
         $this->transports = $transports;
     }
-
-
 }

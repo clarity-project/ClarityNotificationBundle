@@ -44,8 +44,6 @@ class MailTransport implements TransportInterface
             return false;
         }
 
-        // $message->setTemplating($this->templating);
-
         // return $this->mailer->send($message->build());
     }
 
