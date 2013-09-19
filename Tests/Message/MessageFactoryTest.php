@@ -25,10 +25,14 @@ class MessageFactoryTest extends WebTestCase
             sprintf('Factory object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Factory')
         );
 
-        $mail = $factory->create('mail', array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'z.aliakseyeu@gmail.com', 'body' => 'test=test'));
+        $mail = $factory->create('mail', array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'z.aliakseyeu@gmail.com', 'body' => 'test {{ content }}', 'body_data' => array('content' => 'asdf')));
 
         $this->assertTrue($mail->getData() instanceof \Swift_Message,
-            'Factory method "get" doesen\'t properly get Message from registry.'
+            'Mail was not properly built.'
+        );
+
+        $this->assertTrue($mail->getData()->getBody()  == 'test asdf',
+            'Templating render is not valid. Please check it in MailType.'
         );
     }
 }

@@ -33,16 +33,16 @@ class MailType implements MessageTypeInterface
 
         $resolver->setDefaults(array(
             'sender' => null,
-            'body-variables' => array(),
+            'body_data' => array(),
             'cc' => array(),
             'bcc' => array(),
-            'reply-to' => array(),
+            'reply_to' => array(),
             'subject' => null,
-            'content-type' => 'text/plain',
+            'content_type' => 'text/plain',
         ));
 
         $resolver->setAllowedValues(array(
-            'content-type' => array('text/plain', 'text/html'),
+            'content_type' => array('text/plain', 'text/html'),
         ));
     }
 
@@ -54,7 +54,7 @@ class MailType implements MessageTypeInterface
         $message = \Swift_Message::newInstance($configuration['subject'])
             ->setFrom($configuration['from'])
             ->setTo($configuration['to'])
-            ->setBody($this->twig->render($configuration['body'], $configuration['body-variables']))
+            ->setBody($this->twig->render($configuration['body'], $configuration['body_data']))
         ;
 
         return $message;
