@@ -23,7 +23,7 @@ class MessageRegistryTest extends WebTestCase
             sprintf('Registry object is instance of "%s" instead "%s"', get_class($registry), 'Clarity\NotificationBundle\Message\Registry')
         );
 
-        $type = $registry->get('mail', array('to' => 'asdfas', 'from' => 'asdfasdf', 'body' => 'asdfasdf'));
+        $type = $registry->get('mail', array('to' => 'z.aliakseyeu@gmail.com', 'from' => 'z.aliakseyeu@gmail.com', 'body' => 'asdfasdf'));
 
         $this->assertTrue($type instanceof MessageInterface,
             sprintf('Mail type object is instance of "%s" instead "%s"', get_class($type), 'Clarity\NotificationBundle\Message\MessageInterface')

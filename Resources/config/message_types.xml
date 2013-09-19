@@ -10,8 +10,9 @@
     </parameters>
 
     <services>
-        <service id="clarity_notification.message.type.mail" class="%clarity_notification.message.type.mail.class%">
+        <service id="clarity_notification.message.type.mail" class="%clarity_notification.message.type.mail.class%" public="false">
             <tag name="clarity_notification.message_type" />
+            <argument type="service" id="twig.string" />
         </service>
     </services>
     

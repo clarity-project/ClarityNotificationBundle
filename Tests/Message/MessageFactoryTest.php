@@ -20,24 +20,15 @@ class MessageFactoryTest extends WebTestCase
     {
         $client = static::createClient();
         $factory = $client->getContainer()->get('clarity_notification.message_factory');
+
         $this->assertTrue($factory instanceof MessageFactory, 
             sprintf('Factory object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Factory')
         );
 
-        $message = $factory->create(new MailType(), array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'acin91@gmail.com', 'body' => 'test=test'));
-        $this->assertTrue($message instanceof MessageInterface, 
-            sprintf('Message object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Message')
-        );
+        $mail = $factory->create('mail', array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'z.aliakseyeu@gmail.com', 'body' => 'test=test'));
 
-        $config = $message->getConfig();
-        $this->assertTrue($config['body'] == 'test=test', 
-            'Message Resolver is broken. Checkup method "resolve"'
-        );
-
-        $mail = $factory->create('mail', array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'acin91@gmail.com', 'body' => 'test=test'));
-
-        $this->assertTrue($message == $mail,
-            'Factory method "get" doesen\'t properly get Message from registry'
+        $this->assertTrue($mail->getData() instanceof \Swift_Message,
+            'Factory method "get" doesen\'t properly get Message from registry.'
         );
     }
 }

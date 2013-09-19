@@ -8,9 +8,9 @@ namespace Clarity\NotificationBundle\Message;
 interface MessageInterface
 {
     /**
-     * @return array
+     * @return mixed
      */
-    public function getConfig();
+    public function getData();
 
     /**
      * @return string

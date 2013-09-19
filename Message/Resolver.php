@@ -17,8 +17,9 @@ class Resolver
     {
         $resolver = new OptionsResolver();
         $type->buildConfiguration($resolver);
-        $message = new Message($type->getName(), $resolver->resolve($options));
+        $data = $resolver->resolve($options);
+        $data = $type->build($data);
 
-        return $message;
+        return new Message($type->getName(), $data);
     }
 }

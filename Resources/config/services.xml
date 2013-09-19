@@ -28,6 +28,12 @@
             <argument type="service" id="clarity_notification.message_registry" />
             <argument type="service" id="clarity_notification.message_type_resolver" />
         </service>
+        
+        <service id="twig.string_loader" class="Twig_Loader_String" />
+        <service id="twig.string" class="%twig.class%">
+            <argument type="service" id="twig.string_loader" />
+            <argument>%twig.options%</argument>
+        </service>
 
         <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
             <argument /> <!-- available transports -->

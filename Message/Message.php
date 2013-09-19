@@ -13,26 +13,26 @@ class Message implements MessageInterface
     private $name;
 
     /**
-     * @var array
+     * @var mixed
      */
-    private $config;
+    private $data;
 
     /**
      * @param string $name
-     * @param array $config
+     * @param mixed $data
      */
-    public function __construct($name, array $config)
+    public function __construct($name, $data)
     {
         $this->name = $name;
-        $this->config = $config;
+        $this->data = $data;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getConfig()
+    public function getData()
     {
-        return $this->config;
+        return $this->data;
     }
 
     /**

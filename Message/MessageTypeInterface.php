@@ -15,6 +15,12 @@ interface MessageTypeInterface
     public function buildConfiguration(OptionsResolverInterface $resolver);
 
     /**
+     * @param array $configuration
+     * @return mixed
+     */
+    public function build(array $configuration);
+
+    /**
      * Unique name of the message
      * 
      * @return string
