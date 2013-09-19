@@ -7,4 +7,13 @@ namespace Clarity\NotificationBundle\Message;
  */
 interface MessageInterface
 {
+    /**
+     * @return array
+     */
+    public function getConfig();
+
+    /**
+     * @return string
+     */
+    public function getName();
 }

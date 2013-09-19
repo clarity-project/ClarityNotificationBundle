@@ -24,9 +24,14 @@ class MessageFactoryTest extends WebTestCase
             sprintf('Factory object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Factory')
         );
 
-        $message = $factory->create(new MailType());
+        $message = $factory->create(new MailType(), array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'acin91@gmail.com', 'body' => 'test=test'));
         $this->assertTrue($message instanceof MessageInterface, 
             sprintf('Message object is instance of "%s" instead "%s"', get_class($factory), 'Clarity\NotificationBundle\Message\Message')
         );
+
+        $config = $message->getConfig();
+        $this->assertTrue($config['body'] == 'test=test', 
+            'Message Resolver is broken. Checkup method "resolve"'
+        );        
     }
 }
