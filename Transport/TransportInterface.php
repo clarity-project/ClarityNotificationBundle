@@ -2,7 +2,7 @@
 
 namespace Clarity\NotificationBundle\Transport;
 
-use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
+use Clarity\NotificationBundle\Message\MessageInterface;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -10,14 +10,19 @@ use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
 interface TransportInterface
 {
     /**
-     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $message
+     * @param \Clarity\NotificationBundle\Message\Type\MessageInterface $message
      * @return boolean
      */
-    public function notify(MessageTypeInterface $message);
+    public function notify(MessageInterface $message);
     
     /**
-     * @param \Clarity\NotificationBundle\Message\Type\MessageTypeInterface $message
+     * @param \Clarity\NotificationBundle\Message\Type\MessageInterface $message
      * @return boolean
      */
-    public function isSupported(MessageTypeInterface $message);
+    public function isSupported(MessageInterface $message);
+
+    /**
+     * @return string
+     */
+    public function getName();
 }

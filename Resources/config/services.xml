@@ -10,11 +10,15 @@
         <parameter key="clarity_notification.message_factory.class">Clarity\NotificationBundle\Message\Factory</parameter>
         <parameter key="clarity_notification.message_registry.class">Clarity\NotificationBundle\Message\Registry</parameter>
         <parameter key="clarity_notification.message_type_resolver.class">Clarity\NotificationBundle\Message\Resolver</parameter>
+        <parameter key="clarity_notification.transport_registry.class">Clarity\NotificationBundle\Transport\Registry</parameter>
     </parameters>
 
     <services>
         <service id="clarity_notification.message_registry" class="%clarity_notification.message_registry.class%">
             <argument type="service" id="clarity_notification.message_type_resolver" />
+        </service>
+
+        <service id="clarity_notification.transport_registry" class="%clarity_notification.transport_registry.class%">
         </service>
 
         <service id="clarity_notification.message_type_resolver" class="%clarity_notification.message_type_resolver.class%">

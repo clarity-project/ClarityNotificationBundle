@@ -3,7 +3,7 @@
 namespace Clarity\NotificationBundle\Transport;
 
 use Symfony\Component\Templating\EngineInterface;
-use Clarity\NotificationBundle\Message\Type\MessageTypeInterface;
+use Clarity\NotificationBundle\Message\MessageInterface;
 use Clarity\NotificationBundle\Message\Type\MailType;
 
 /**
@@ -12,44 +12,56 @@ use Clarity\NotificationBundle\Message\Type\MailType;
 class MailTransport implements TransportInterface
 {
     /**
-     * @var \Symfony\Component\Templating\EngineInterface
-     */
-    private $templating;
-
-    /**
      * @var \Swift_Mailer
      */
     private $mailer;
 
     /**
-     * @param \Symfony\Component\Templating\EngineInterface $templating
      * @param \Swift_Mailer $mailer
      */
-    public function __construct(EngineInterface $templating, \Swift_Mailer $mailer)
+    public function __construct(\Swift_Mailer $mailer)
     {
-        $this->templating   = $templating;
-        $this->mailer       = $mailer;
+        $this->mailer = $mailer;
+    }
+
+    /**
+     * @param array $supported
+     * @return self
+     */
+    public function setSupported(array $supported)
+    {
+        $this->supported = $supported;
+
+        return $this;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function notify(MessageTypeInterface $message)
+    public function notify(MessageInterface $message)
     {
         if (!$this->isSupported($message)) {
             return false;
         }
 
-        $message->setTemplating($this->templating);
+        // $message->setTemplating($this->templating);
 
-        return $this->mailer->send($message->build());
+        // return $this->mailer->send($message->build());
     }
 
     /**
      * {@inheritDoc}
      */
-    public function isSupported(MessageTypeInterface $message)
+    public function isSupported(MessageInterface $message)
     {
-        return (bool) ($message instanceof MailType);
+        return (boolean) array_search($message->getName(), $this->supported);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'mail';
     }
 }
