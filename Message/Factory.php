@@ -38,6 +38,8 @@ class Factory
 
         if ($type instanceof MessageTypeInterface) {
             $message = $this->resolver->resolve($type, $options);
+        } elseif (is_string($type)) {
+            $message = $this->registry->get($type, $options);
         }
         
         return $message;

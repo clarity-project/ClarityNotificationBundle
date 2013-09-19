@@ -20,16 +20,6 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('clarity_notification');
-
-        $rootNode
-            ->children()
-                ->arrayNode('templates')
-                ->prototype('array')
-                    ->prototype('scalar')->end()
-                ->end()
-            ->end()
-        ;
 
         return $treeBuilder;
     }

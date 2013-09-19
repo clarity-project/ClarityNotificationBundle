@@ -13,7 +13,7 @@ class Resolver
      * @param \Clarity\NotificationBundle\Message\MessageTypeInterface
      * @return \Clarity\NotificationBundle\Message\MessageInterface
      */
-    public function resolve(MessageTypeInterface $type, $options = null)
+    public function resolve(MessageTypeInterface $type, $options = array())
     {
         $resolver = new OptionsResolver();
         $type->buildConfiguration($resolver);

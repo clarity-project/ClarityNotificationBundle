@@ -32,6 +32,12 @@ class MessageFactoryTest extends WebTestCase
         $config = $message->getConfig();
         $this->assertTrue($config['body'] == 'test=test', 
             'Message Resolver is broken. Checkup method "resolve"'
-        );        
+        );
+
+        $mail = $factory->create('mail', array('from' => 'z.aliakseyeu@gmail.com', 'to' => 'acin91@gmail.com', 'body' => 'test=test'));
+
+        $this->assertTrue($message == $mail,
+            'Factory method "get" doesen\'t properly get Message from registry'
+        );
     }
 }

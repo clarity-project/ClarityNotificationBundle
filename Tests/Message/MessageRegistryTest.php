@@ -4,6 +4,7 @@ namespace Clarity\NotificationBundle\Tests\Message;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Clarity\NotificationBundle\Message\Registry as MessageRegistry;
+use Clarity\NotificationBundle\Message\MessageInterface;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -20,6 +21,12 @@ class MessageRegistryTest extends WebTestCase
         $registry = $client->getContainer()->get('clarity_notification.message_registry');
         $this->assertTrue($registry instanceof MessageRegistry, 
             sprintf('Registry object is instance of "%s" instead "%s"', get_class($registry), 'Clarity\NotificationBundle\Message\Registry')
+        );
+
+        $type = $registry->get('mail', array('to' => 'asdfas', 'from' => 'asdfasdf', 'body' => 'asdfasdf'));
+
+        $this->assertTrue($type instanceof MessageInterface,
+            sprintf('Mail type object is instance of "%s" instead "%s"', get_class($type), 'Clarity\NotificationBundle\Message\MessageInterface')
         );
     }
 }

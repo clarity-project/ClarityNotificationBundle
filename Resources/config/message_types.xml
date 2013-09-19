@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    
+    <parameters>
+        <parameter key="clarity_notification.message.type.mail.class">Clarity\NotificationBundle\Message\Type\MailType</parameter>
+    </parameters>
+
+    <services>
+        <service id="clarity_notification.message.type.mail" class="%clarity_notification.message.type.mail.class%">
+            <tag name="clarity_notification.message_type" />
+        </service>
+    </services>
+    
+</container>

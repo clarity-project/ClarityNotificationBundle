@@ -19,13 +19,8 @@ class ClarityNotificationExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $container->setParameter('clarity_notification.templates', $config['templates']);
-
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-        $loader->load('default_transports.xml');
+        $loader->load('message_types.xml');
     }
 }
