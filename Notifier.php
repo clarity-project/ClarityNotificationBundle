@@ -2,30 +2,35 @@
 
 namespace Clarity\NotificationBundle;
 
+use Clarity\NotificationBundle\Transport\Registry as TransportRegistry;
+
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
 class Notifier
 {
-    /**
-     * Transports collection
-     * 
-     * @var array
-     */
-    private $transports;
 
     /**
-     * Templates of default options for different types of messages
+     * Transports registry
      * 
-     * @var array $options 
+     * @var Transport\Registry
      */
-    private $templates;
+    private $registry;
 
     /**
      * @param array $transports
      */
-    public function __construct(array $transports)
+    public function __construct(TransportRegistry $registry)
     {
-        $this->transports = $transports;
+        $this->registry = $registry;
+    }
+
+    /**
+     * @param string $name
+     * @return Transport\TransportInterface
+     */
+    public function with($name)
+    {
+        return $this->registry->get($name);
     }
 }

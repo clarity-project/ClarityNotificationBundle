@@ -13,7 +13,7 @@ interface TransportInterface
      * @param \Clarity\NotificationBundle\Message\Type\MessageInterface $message
      * @return boolean
      */
-    public function notify(MessageInterface $message);
+    public function send(MessageInterface $message);
     
     /**
      * @param \Clarity\NotificationBundle\Message\Type\MessageInterface $message

@@ -38,13 +38,13 @@ class MailTransport implements TransportInterface
     /**
      * {@inheritDoc}
      */
-    public function notify(MessageInterface $message)
+    public function send(MessageInterface $message)
     {
         if (!$this->isSupported($message)) {
             return false;
         }
 
-        // return $this->mailer->send($message->build());
+        return $this->mailer->send($message->getData());
     }
 
     /**
@@ -52,7 +52,7 @@ class MailTransport implements TransportInterface
      */
     public function isSupported(MessageInterface $message)
     {
-        return (boolean) array_search($message->getName(), $this->supported);
+        return (false === array_search($message->getName(), $this->supported)) ? false : true;
     }
 
     /**
