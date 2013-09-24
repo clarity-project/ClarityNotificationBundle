@@ -36,6 +36,22 @@ class Message implements MessageInterface
     }
 
     /**
+     * @param mixed
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @param string
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getName()

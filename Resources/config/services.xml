@@ -37,6 +37,7 @@
 
         <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
             <argument type="service" id="clarity_notification.transport_registry" />
+            <argument type="service" id="clarity_notification.message_factory" />
         </service>
     </services>
     

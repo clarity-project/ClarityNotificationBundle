@@ -43,8 +43,20 @@ class MailTransport implements TransportInterface
         if (!$this->isSupported($message)) {
             return false;
         }
+        if ($message->getData() instanceof \Swift_Message) {
+            $this->mailer->send($message->getData());
+        } else {
+            $data = $message->getData();
+            $message = \Swift_Message::newInstance()
+                ->setSubject($data['subject'])
+                ->setFrom($data['from'])
+                ->setTo($data['to'])
+                ->setBody($data['body'])
+            ;
+            $this->mailer->send($message);
+        }
 
-        return $this->mailer->send($message->getData());
+        return;
     }
 
     /**
