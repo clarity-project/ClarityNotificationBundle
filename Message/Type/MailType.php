@@ -51,13 +51,16 @@ class MailType implements MessageTypeInterface
      */
     public function build(array $configuration)
     {
-        $message = \Swift_Message::newInstance($configuration['subject'])
-            ->setFrom($configuration['from'])
-            ->setTo($configuration['to'])
-            ->setBody($this->twig->render($configuration['body'], $configuration['body_data']))
-        ;
+        // $message = \Swift_Message::newInstance($configuration['subject'])
+        //     ->setFrom($configuration['from'])
+        //     ->setTo($configuration['to'])
+        //     ->setBody($this->twig->render($configuration['body'], $configuration['body_data']))
+        // ;
 
-        return $message;
+        // return $message;
+        $configuration['body'] = $this->twig->render($configuration['body'], $configuration['body_data']);
+
+        return $configuration;
     }
 
     /**
