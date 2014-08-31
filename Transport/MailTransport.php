@@ -52,6 +52,7 @@ class MailTransport implements TransportInterface
                 ->setFrom($data['from'])
                 ->setTo($data['to'])
                 ->setBody($data['body'])
+                ->setContentType($data['content_type'])
             ;
             $this->mailer->send($message);
         }
