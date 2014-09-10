@@ -53,6 +53,7 @@ class MailTransport implements TransportInterface
                 ->setFrom($data['from'])
                 ->setTo($data['to'])
                 ->setBody($data['body'])
+                ->setContentType($data['content_type'])
             ;
 
             // replace subject object because of \r\n problem
