@@ -5,6 +5,7 @@ namespace Clarity\NotificationBundle\Transport;
 use Symfony\Component\Templating\EngineInterface;
 use Clarity\NotificationBundle\Message\MessageInterface;
 use Clarity\NotificationBundle\Message\Type\MailType;
+use Clarity\NotificationBundle\Message\Header\UnstructuredHeader;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -53,6 +54,15 @@ class MailTransport implements TransportInterface
                 ->setTo($data['to'])
                 ->setBody($data['body'])
             ;
+
+            // replace subject object because of \r\n problem
+            $subject = $message->getHeaders()->get('subject');
+            $header = new UnstructuredHeader(
+                'Subject', $subject->getEncoder(), $subject->getGrammar()
+            );
+            $header->setValue($data['subject']);
+            $message->getHeaders()->set($header);
+
             $this->mailer->send($message);
         }
 
