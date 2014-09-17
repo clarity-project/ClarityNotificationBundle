@@ -38,6 +38,7 @@ class MailType implements MessageTypeInterface
             'bcc' => array(),
             'reply_to' => array(),
             'subject' => null,
+            'subject_data' => array(),
             'content_type' => 'text/plain',
         ));
 
@@ -51,8 +52,11 @@ class MailType implements MessageTypeInterface
      */
     public function build(array $configuration)
     {
-        $content = $this->twig->render($configuration['body'], $configuration['body_data']);
-        $configuration['body'] = $this->twig->render('{{ "'.$content.'"|raw }}');
+        $bodyContent = $this->twig->render($configuration['body'], $configuration['body_data']);
+        $configuration['body'] = $this->twig->render('{{ "'.$bodyContent.'"|raw }}');
+
+        $subjectContent = $this->twig->render($configuration['subject'], $configuration['subject_data']);
+        $configuration['subject'] = $this->twig->render('{{ "'.$subjectContent.'"|raw }}');
 
         return $configuration;
     }
