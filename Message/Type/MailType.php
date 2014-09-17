@@ -52,11 +52,8 @@ class MailType implements MessageTypeInterface
      */
     public function build(array $configuration)
     {
-        $bodyContent = $this->twig->render($configuration['body'], $configuration['body_data']);
-        $configuration['body'] = $this->twig->render('{{ "'.$bodyContent.'"|raw }}');
-
-        $subjectContent = $this->twig->render($configuration['subject'], $configuration['subject_data']);
-        $configuration['subject'] = $this->twig->render('{{ "'.$subjectContent.'"|raw }}');
+        $configuration['body'] = $this->twig->render($configuration['body'], $configuration['body_data']);
+        $configuration['subject'] = $this->twig->render($configuration['subject'], $configuration['subject_data']);
 
         return $configuration;
     }
