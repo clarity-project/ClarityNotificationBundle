@@ -32,7 +32,10 @@
         <service id="twig.string_loader" class="Twig_Loader_String" />
         <service id="twig.string" class="%twig.class%">
             <argument type="service" id="twig.string_loader" />
-            <argument>%twig.options%</argument>
+            <argument type="collection">
+                <argument key="cache">false</argument>
+                <argument key="autoescape">false</argument>
+            </argument>
         </service>
 
         <service id="clarity_notification.notifier" class="%clarity_notification.notifier.class%">
